@@ -8,6 +8,7 @@
             </div>
             <p class="mg-b-20">سفارشی سازی آن بسیار آسان است و از آن در پیاده سازی وب سایت شما استفاده می شود.</p>
             <form method="post" action="{{route('edit_user')}}" enctype="multipart/form-data">
+                <input type="hidden" value="{{$user->id}}" name="id">
                 @csrf
                 <div class="row row-sm">
                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -15,8 +16,9 @@
                             <label>نام کاربر</label>
                             <input class="form-control" name="name" value="{{$user->name}}" placeholder="نام کاربر">
                             @error('name')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
+
                         </div>
                     </div>
                 </div>
@@ -26,7 +28,10 @@
                             <label>نام کاربری</label>
                             <input class="form-control" name="username" value="{{$user->username}}" placeholder="نام کاربری">
                             @error('username')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
+                            @enderror
+                            @error('duplicate')
+                                <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -45,7 +50,7 @@
                             <label>نقش کاربری</label>
                             <select name="role" class="form-control">
                                 @foreach($roles as $role)
-                                    <option value="{{$role->id}}" @if($role->id === $user->role_id) selected @endif>{{$role->name}}</option>
+                                    <option value="{{$role->name}}" @if($role->name === $user->getRoleNames()[0]) selected @endif>{{$role->name}}</option>
                                 @endforeach
                             </select>
                         </div>

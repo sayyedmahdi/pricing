@@ -276,14 +276,14 @@
                                                             <label>نام کاربری</label>
                                                             <input class="form-control" name="username" placeholder="نام کاربری خود را وارد کنید" type="text"  required>
                                                             @error('username')
-                                                            <div class="error">{{ $message }}</div>
+                                                            <div class="alert alert-danger error">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label>کلمه عبور</label>
                                                             <input class="form-control" name="password" placeholder="رمز عبور خود را وارد کنید" type="password" required>
                                                             @error('password')
-                                                            <div class="error">{{ $message }}</div>
+                                                            <div class="alert alert-danger error">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <button class="btn btn-main-primary btn-block" type="submit">ورود</button>

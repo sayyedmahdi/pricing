@@ -42,9 +42,9 @@
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt="" src="{{asset('assets/img/faces/profile-no.png')}}" class=""></div>
-{{--                                <div class="ms-3 my-auto">--}}
-{{--                                    <h6>{{auth()->user()->name}} {{auth()->user()->surname}}</h6><span>{{auth()->user()->getRoleNames()[0]}}</span>--}}
-{{--                                </div>--}}
+                                <div class="ms-3 my-auto">
+                                    <h6>{{auth()->user()->name}} {{auth()->user()->surname}}</h6><span>{{auth()->user()->getRoleNames()[0]}}</span>
+                                </div>
                             </div>
                         </div>
                         <a class="dropdown-item" href="#"><i class="bx bx-user-circle"></i>مشخصات</a>

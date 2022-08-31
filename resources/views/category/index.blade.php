@@ -11,8 +11,8 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">لیست محصولات</h4>
-                    <a href="{{route('create_product')}}" class="btn btn-primary">افزودن محصول</a>
+                    <h4 class="card-title mg-b-0">لیست دسته بندی</h4>
+                    <a href="{{route('create_category')}}" class="btn btn-primary">افزودن دسته بندی</a>
                 </div>
             </div>
             <div class="card-body">
@@ -21,26 +21,16 @@
                         <thead>
                         <tr>
                             <th class="border-bottom-0">نام</th>
-                            <th class="border-bottom-0">دسته بندی</th>
-                            <th class="border-bottom-0">قیمت سطح 1</th>
-                            <th class="border-bottom-0">قیمت سطح 2</th>
-                            <th class="border-bottom-0">قیمت سطح 3</th>
-                            <th class="border-bottom-0">تصویر</th>
                             <th class="border-bottom-0">عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
+                        @foreach($categories as $category)
                             <tr>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->category->name}}</td>
-                                <td>{{$product->price1}}</td>
-                                <td>{{$product->price2}}</td>
-                                <td>{{$product->price3}}</td>
-                                <td><img height="50px" src="{{asset("Image/$product->image")}}"></td>
+                                <td>{{$category->name}}</td>
                                 <td>
-                                    <a href="{{route('show_edit_product' , $product->id)}}" class="btn btn-success">ویرایش</a>
-                                    <button class="btn btn-danger delete-btn" data-id="{{$product->id}}" >حذف</button>
+                                    <a href="{{route('show_edit_product' , $category->id)}}" class="btn btn-success">ویرایش</a>
+                                    <button class="btn btn-danger delete-btn" data-id="{{$category->id}}" >حذف</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -91,14 +81,14 @@
                     closeOnConfirm: false
                 },
                 function(){
-                    let url = 'product/delete/' + id
+                    let url = 'category/delete/' + id
                     axios.get(url)
                         .then((res) => {
                             swal("حذف!", "فایل مورد نظر با موفقیت حذف شد", "success");
-                            window.location = '/product'
+                            window.location = '/category'
                         })
                         .catch((err) => {
-                            window.location = '/product'
+                            window.location = '/category'
                         })
 
                 });

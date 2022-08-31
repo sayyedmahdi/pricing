@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccessControlController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommodityController;
 use App\Http\Controllers\CommodityPropertyController;
 use App\Http\Controllers\CommodityTypeController;
@@ -50,6 +51,7 @@ Route::get('/', function () {
 // ///////////////////   user routes  ///////////////////////
 
 Route::get('/login', [UserController::class , 'showLogin'])->name("login");
+Route::get('/products' , [ProductController::class , 'showProducts']);
 
 Route::post('login' , [UserController::class , 'login'])->name('login_action');
 
@@ -59,8 +61,8 @@ Route::get('/profile', function () {
     return view('user.profile');
 })->middleware('auth');
 
-Route::group(['prefix' => 'product'] , function () {
-    Route::get('/' , [ProductController::class , 'index']);
+Route::group(['prefix' => 'product' , 'middleware' => 'web'] , function () {
+    Route::get('/' , [ProductController::class , 'index'])->name('index_product');
     Route::get('create' , [ProductController::class , 'create']);
     Route::get('edit/{id}' , [ProductController::class , 'showEdit'])->name('show_edit_product');
     Route::post('edit' , [ProductController::class , 'edit'])->name('edit_product');
@@ -68,13 +70,22 @@ Route::group(['prefix' => 'product'] , function () {
     Route::get('/delete/{id}' , [ProductController::class , 'destroy'])->name('delete_product');
 });
 
-Route::group(['prefix' => 'user'] , function () {
-    Route::get('create' , [UserController::class , 'create']);
-    Route::get('/' , [UserController::class , 'index']);
-    Route::get('edit/{id}' , [UserController::class , 'showEdit']);
+Route::group(['prefix' => 'category' , 'middleware' => 'web'] , function () {
+    Route::get('/' , [CategoryController::class , 'index'])->name('index_category');
+    Route::get('create' , [CategoryController::class , 'create']);
+    Route::get('edit/{id}' , [CategoryController::class , 'showEdit'])->name('show_edit_category');
+    Route::post('edit' , [CategoryController::class , 'edit'])->name('edit_category');
+    Route::post('create' , [CategoryController::class , 'store'])->name('create_category');
+    Route::get('/delete/{id}' , [CategoryController::class , 'destroy'])->name('delete_category');
+});
+
+Route::group(['prefix' => 'user' , 'middleware' => 'web'] , function () {
+    Route::get('create' , [UserController::class , 'showCreate']);
+    Route::get('/' , [UserController::class , 'index'])->name('index_user');
+    Route::get('edit/{id}' , [UserController::class , 'showEdit'])->name('show_edit_user');
     Route::post('edit' , [UserController::class , 'edit'])->name('edit_user');
     Route::post('create' , [UserController::class , 'register'])->name('create_user');
-    Route::get('/delete/{id}' , [ProductController::class , 'destroy'])->name('delete_product');
+    Route::get('/delete/{id}' , [ProductController::class , 'destroy'])->name('delete_user');
 });
 
 Route::get('/logout', function () {

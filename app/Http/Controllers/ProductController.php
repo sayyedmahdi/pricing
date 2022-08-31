@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+
+        return view('product.create' , compact('categories'));
     }
 
     /**
@@ -63,10 +66,11 @@ class ProductController extends Controller
             'price1' => $request->price1,
             'price2' => $request->price2,
             'price3' => $request->price3,
-            'image' => $image_path
+            'image' => $image_path,
+            'category_id' => $request->category
         ]);
 
-        return back()->with('success' , 'product created');
+        return redirect()->route('index_product');
     }
 
     /**
@@ -78,8 +82,9 @@ class ProductController extends Controller
     public function showEdit($id)
     {
         $product = Product::find($id);
+        $categories = Category::all();
 
-        return view('product.edit' , compact('product'));
+        return view('product.edit' , compact('product' , 'categories'));
     }
 
     /**
@@ -96,7 +101,7 @@ class ProductController extends Controller
             'price1' => 'required|numeric',
             'price2' => 'required|numeric',
             'price3' => 'required|numeric',
-            'image' => 'required'
+            'image' => 'nullable'
         ]);
 
         if ($validator->fails()){
@@ -119,9 +124,10 @@ class ProductController extends Controller
         $product->price2 = $request->price2;
         $product->price3 = $request->price3;
         $product->name = $request->name;
+        $product->category_id = $request->category;
         $product->save();
 
-        return back()->with('success' , 'product created');
+        return redirect()->route('index_product');
     }
 
 
@@ -140,5 +146,11 @@ class ProductController extends Controller
         }
 
         return response()->json('product deleted' , '200');
+    }
+
+    public function showProducts(){
+        $products = Product::all();
+
+        return view('products' , compact('products'));
     }
 }

@@ -8,6 +8,7 @@
             </div>
             <p class="mg-b-20">سفارشی سازی آن بسیار آسان است و از آن در پیاده سازی وب سایت شما استفاده می شود.</p>
             <form method="post" action="{{route('edit_product')}}" enctype="multipart/form-data">
+                <input type="hidden" value="{{$product->id}}" name="id">
                 @csrf
                 <div class="row row-sm">
                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -15,8 +16,24 @@
                             <label>نام محصول</label>
                             <input class="form-control" name="name" value="{{$product->name}}" placeholder="نام محصول">
                             @error('name')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label class="">دسته بندی</label>
+                            <select class="form-control " id="parent-category-input" name="category" required>
+                                @foreach($categories as $category)
+                                    @if($category->id == $product->category_id)
+                                        <option value="{{$category->id}}" selected="selected">{{$category->name}}</option>
+                                    @else
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -26,7 +43,7 @@
                             <label>قیمت سطح1</label>
                             <input class="form-control" value="{{$product->price1}}" name="price1" placeholder="قیمت سطح1">
                             @error('price1')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -35,7 +52,7 @@
                             <label>قیمت سطح2</label>
                             <input class="form-control" name="price2" value="{{$product->price2}}" placeholder="قیمت سطح2">
                             @error('price2')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -44,7 +61,7 @@
                             <label>قیمت سطح3</label>
                             <input class="form-control" value="{{$product->price3}}" name="price3" placeholder="قیمت سطح3">
                             @error('price3')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -55,7 +72,7 @@
                             <input class="custom-file-input" id="customFile" type="file" name="image">
                             <label class="custom-file-label" for="customFile">انتخاب فایل</label>
                             @error('image')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

@@ -15,7 +15,7 @@
                             <label>نام کاربر</label>
                             <input class="form-control" name="name" placeholder="نام کاربر">
                             @error('name')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -26,7 +26,10 @@
                             <label>نام کاربری</label>
                             <input class="form-control" name="username" placeholder="نام کاربری">
                             @error('username')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
+                            @enderror
+                            @error('duplicate')
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -37,7 +40,7 @@
                             <label>رمز عبور</label>
                             <input class="form-control" name="password" type="password" placeholder="رمز عبور">
                             @error('username')
-                            <div class="error">{{ $message }}</div>
+                            <div class="alert alert-danger error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

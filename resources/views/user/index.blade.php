@@ -12,7 +12,7 @@
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
                     <h4 class="card-title mg-b-0">جدول حاشیه ای</h4>
-                    <a href="{{route('create_product')}}" class="btn btn-primary">افزودن محصول</a>
+                    <a href="{{route('create_user')}}" class="btn btn-primary">افزودن کاربر</a>
                 </div>
             </div>
             <div class="card-body">
@@ -31,7 +31,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->username}}</td>
                                 <td>
-                                    <a href="{{route('show_edit_product' , $user->id)}}" class="btn btn-success">ویرایش</a>
+                                    <a href="{{route('show_edit_user' , $user->id)}}" class="btn btn-success">ویرایش</a>
                                     <button class="btn btn-danger delete-btn" data-id="{{$user->id}}" >حذف</button>
                                 </td>
                             </tr>
@@ -83,14 +83,14 @@
                     closeOnConfirm: false
                 },
                 function(){
-                    let url = 'product/delete/' + id
+                    let url = 'user/delete/' + id
                     axios.get(url)
                         .then((res) => {
                             swal("حذف!", "فایل مورد نظر با موفقیت حذف شد", "success");
-                            window.location = '/product'
+                            window.location = '/user'
                         })
                         .catch((err) => {
-                            window.location = '/product'
+                            window.location = '/user'
                         })
 
                 });
