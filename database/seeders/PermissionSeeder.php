@@ -46,6 +46,11 @@ class PermissionSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+//        DB::table('permissions')->insert([
+//            'name' => 'view all product',
+//            'guard_name' => 'web',
+//        ]);
+
         DB::table('permissions')->insert([
             'name' => 'view product type2',
             'guard_name' => 'web',
@@ -77,6 +82,24 @@ class PermissionSeeder extends Seeder
         ]);
         DB::table('permissions')->insert([
             'name' => 'create user',
+            'guard_name' => 'web',
+        ]);
+
+
+        DB::table('permissions')->insert([
+            'name' => 'edit category',
+            'guard_name' => 'web',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'view category',
+            'guard_name' => 'web',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'delete category',
+            'guard_name' => 'web',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'create category',
             'guard_name' => 'web',
         ]);
 

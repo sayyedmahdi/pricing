@@ -43,7 +43,8 @@ class RoleSeeder extends Seeder
         $user2Role = Role::where('name' , 'User2')->first();
         $user3Role = Role::where('name' , 'User3')->first();
         $adminPermissions = Permission::whereNotIn('name' , [
-            'edit permission' , 'view permission' , 'delete permission' , 'create permission'
+            'edit permission' , 'view permission' , 'delete permission' , 'create permission',
+            'view user' , 'create user' , 'edit user' , 'delete user'
         ])->get();
         $user1Permissions = Permission::whereIn('name' , ['view product type1'])->get();
         $user2Permissions = Permission::whereIn('name' , ['view product type2'])->get();

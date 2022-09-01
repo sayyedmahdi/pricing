@@ -71,7 +71,7 @@ return [
                         'name'         => 'لیست دسته بندی ها',
                         'url'          => '/category' ,
                         'icon'         => '<i class="fas fa-store side-menu__icon"></i>' ,
-                        'permission'   => 'view user',
+                        'permission'   => 'view category',
                     ],
                 ]
             ]
