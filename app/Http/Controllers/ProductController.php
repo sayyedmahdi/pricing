@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductsImport;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -152,5 +154,19 @@ class ProductController extends Controller
         $products = Product::all();
 
         return view('products' , compact('products'));
+    }
+
+    public function import(Request $request){
+        $validator = Validator::make($request->all() , [
+            'file' => 'required|file'
+        ]);
+
+        if ($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        Excel::import(new ProductsImport, $request->file('file'));
+
+        //return redirect()->back()->with('success', 'User Imported Successfully');
     }
 }

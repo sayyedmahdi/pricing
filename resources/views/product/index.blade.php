@@ -7,12 +7,20 @@
 
 @section('content')
     <!--div-->
+    @error('file')
+    <div class="alert alert-danger">{{$message}}</div>
+    @enderror
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">لیست محصولات</h4>
-                    <a href="{{route('create_product')}}" class="btn btn-primary">افزودن محصول</a>
+                <div class="d-flex ">
+                    <h4 class="card-title mg-b-0" style="height: 40px; margin-top: 12px; margin-left: 20px;">لیست محصولات</h4>
+                    <a href="{{route('create_product')}}" class="btn btn-primary" style="height: 40px">افزودن محصول</a>
+                    <form action="{{route('import_product')}}" method="post" enctype="multipart/form-data" style="display: flex; align-items: center; margin-right: auto">
+                        @csrf
+                        <input type="file" name="file"  class="form-control ml-2">افزودن محصول</input>
+                        <button href="{{route('create_product')}}" type="submit" class="btn btn-primary">بارگذاری اکسل</button>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
@@ -20,6 +28,7 @@
                     <table id="example" class="table key-buttons text-md-nowrap">
                         <thead>
                         <tr>
+                            <th class="border-bottom-0">شناسه</th>
                             <th class="border-bottom-0">نام</th>
                             <th class="border-bottom-0">دسته بندی</th>
                             <th class="border-bottom-0">قیمت سطح 1</th>
@@ -32,6 +41,7 @@
                         <tbody>
                         @foreach($products as $product)
                             <tr>
+                                <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->price1}}</td>

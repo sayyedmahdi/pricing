@@ -37,6 +37,17 @@
                 <div class="row row-sm">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group">
+                            <label>موبایل</label>
+                            <input class="form-control" name="mobile" placeholder="موبایل">
+                            @error('mobile')
+                            <div class="alert alert-danger error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
                             <label>رمز عبور</label>
                             <input class="form-control" name="password" type="password" placeholder="رمز عبور">
                             @error('username')

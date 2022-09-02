@@ -51,15 +51,24 @@ Route::get('/', function () {
 // ///////////////////   user routes  ///////////////////////
 
 Route::get('/login', [UserController::class , 'showLogin'])->name("login");
-Route::get('/products' , [ProductController::class , 'showProducts'])->middleware('auth');
+Route::get('/products' , [ProductController::class , 'showProducts'])->middleware('auth')->name('index_all_products');
 
 Route::post('login' , [UserController::class , 'login'])->name('login_action');
 
-Route::get('/dashboard', [UserController::class , 'showDashboard'])->middleware('auth');
+Route::get('/profile', [UserController::class , 'showDashboard'])->middleware('auth');
 
 //Route::get('/profile', function () {
 //    return view('user.profile');
 //})->middleware('auth');
+
+Route::group(['prefix' => '' , 'middleware' => ['auth']] , function () {
+    Route::get('/profile' , [UserController::class , 'dashboardUser'])->name('user_dashboard');
+    Route::post('/profile' , [UserController::class , 'editProfile'])->name('user_profile_edit');
+});
+
+Route::group(['prefix' => '' , 'middleware' => ['auth']] , function () {
+    Route::get('/dashboard' , [UserController::class , 'dashboardAdmin'])->name('admin_dashboard');
+});
 
 Route::group(['prefix' => 'product' , 'middleware' => ['auth' , 'role:Admin' , 'role:Super Admin']] , function () {
     Route::get('/' , [ProductController::class , 'index'])->name('index_product');
@@ -68,6 +77,7 @@ Route::group(['prefix' => 'product' , 'middleware' => ['auth' , 'role:Admin' , '
     Route::post('edit' , [ProductController::class , 'edit'])->name('edit_product');
     Route::post('create' , [ProductController::class , 'store'])->name('create_product');
     Route::get('/delete/{id}' , [ProductController::class , 'destroy'])->name('delete_product');
+    Route::post('/import' , [ProductController::class , 'import'])->name('import_product');
 });
 
 Route::group(['prefix' => 'category' , 'middleware' => ['auth' , 'role:Admin' , 'role:Super Admin']] , function () {

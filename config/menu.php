@@ -29,12 +29,12 @@ return [
                         'icon'         => '<i class="fas fa-user side-menu__icon"></i>' ,
                         'permission'   => 'view user',
                     ],
-                    [
-                        'name'         => 'سطح دسترسی' ,
-                        'url'          => '/access-control' ,
-                        'icon'         => '' ,
-                        'permission'   => '',
-                    ],
+//                    [
+//                        'name'         => 'سطح دسترسی' ,
+//                        'url'          => '/access-control' ,
+//                        'icon'         => '' ,
+//                        'permission'   => '',
+//                    ],
                 ]
             ]
         ]
